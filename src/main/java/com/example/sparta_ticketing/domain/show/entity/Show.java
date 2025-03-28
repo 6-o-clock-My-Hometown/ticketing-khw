@@ -8,6 +8,7 @@ import com.example.sparta_ticketing.domain.show.enums.Region;
 import com.example.sparta_ticketing.domain.show.enums.ShowStatus;
 import com.example.sparta_ticketing.domain.user.entity.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +42,7 @@ public class Show extends BaseEntity {
     private LocalDateTime reservationEndDate;
 
     private int totalSeats;
+
 
     public void sumSeat(int totalSeats) {
         this.totalSeats = totalSeats;
@@ -82,4 +84,30 @@ public class Show extends BaseEntity {
         this.user = user;
         this.status = NOT_DELETED;
     }
+
+    public Show(
+            String title,
+            Category category,
+            String content,
+            Region region,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            LocalDateTime reservationStartDate,
+            LocalDateTime reservationEndDate,
+            int totalSeats,
+            User user
+    ) {
+        this.title = title;
+        this.category = category;
+        this.content = content;
+        this.region = region;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.reservationStartDate = reservationStartDate;
+        this.reservationEndDate = reservationEndDate;
+        this.totalSeats = totalSeats;
+        this.user = user;
+        this.status = NOT_DELETED;
+    }
+
 }

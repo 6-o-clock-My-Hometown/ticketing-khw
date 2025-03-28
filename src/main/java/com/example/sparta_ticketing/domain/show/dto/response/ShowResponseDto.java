@@ -33,7 +33,23 @@ public class ShowResponseDto {
 
     private int totalSeats;
 
-    public static ShowResponseDto toDto(Show show) {
+    private long viewCount;
+
+    public static ShowResponseDto toDto(Show show, long viewCount) {
+        return ShowResponseDto.builder()
+                .title(show.getTitle())
+                .category(show.getCategory())
+                .region(show.getRegion())
+                .startDate(show.getStartDate())
+                .endDate(show.getEndDate())
+                .reservationStartDate(show.getReservationStartDate())
+                .reservationEndDate(show.getReservationEndDate())
+                .totalSeats(show.getTotalSeats())
+                .viewCount(viewCount)
+                .build();
+    }
+
+    public static ShowResponseDto toDtos(Show show) {
         return ShowResponseDto.builder()
                 .title(show.getTitle())
                 .category(show.getCategory())

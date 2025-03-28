@@ -3,12 +3,14 @@ package com.example.sparta_ticketing.domain.show.dto.request;
 import com.example.sparta_ticketing.domain.show.enums.Category;
 import com.example.sparta_ticketing.domain.show.enums.Region;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@AllArgsConstructor
 public class CreateShowRequestDto {
     private String title;
     private Category category;

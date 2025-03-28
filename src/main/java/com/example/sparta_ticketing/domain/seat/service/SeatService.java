@@ -4,9 +4,11 @@ import com.example.sparta_ticketing.common.exception.InvalidRequestException;
 import com.example.sparta_ticketing.domain.seat.dto.request.ChangeSeatRequest;
 import com.example.sparta_ticketing.domain.seat.dto.response.SeatResponse;
 import com.example.sparta_ticketing.domain.seat.entity.Seat;
+import com.example.sparta_ticketing.domain.seat.enums.SeatEnum;
 import com.example.sparta_ticketing.domain.seat.repository.SeatRepository;
 import com.example.sparta_ticketing.domain.show.service.ShowService;
 import com.example.sparta_ticketing.domain.show.entity.Show;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,11 +35,17 @@ public class SeatService {
     @Transactional
     public void updateSeat(Long userId, Long showId, Long seatId, ChangeSeatRequest request) {
 
-        Show show = showService.getShow(showId);
+        Show show = showService.getShowEntity(showId);
         Seat seat = seatRepository.findByIdAndUserId(seatId, userId).orElseThrow(()-> new InvalidRequestException("잘못된 정보입니다."));
         seat.updateSeat(request.getName(), request.getCount(), request.getPrice());
 
         changeTotalSeatCount(show);
+    }
+
+    @Transactional(readOnly = true)
+    public Seat getSeatByShowIdAndSeatName(Long showId, SeatEnum seatName){
+        return seatRepository.findByShow_IdAndName(showId, seatName)
+                .orElseThrow(() -> new EntityNotFoundException("해당 좌석이 존재하지 않습니다."));
     }
 
     private void changeTotalSeatCount(Show show) {

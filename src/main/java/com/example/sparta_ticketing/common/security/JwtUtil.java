@@ -19,9 +19,9 @@ import java.util.Date;
 public class JwtUtil {
 
     private static final String BEARER_PREFIX = "Bearer ";
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 60분
+    private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 24시간
 
-    @Value("${JWT.SECRET.KEY}")
+    @Value("${spring.jwt.secret.key}")
     private String secretKey;
     private Key key;
     //private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
